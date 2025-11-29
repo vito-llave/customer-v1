@@ -1,0 +1,676 @@
+{
+	"info": {
+		"_postman_id": "316ae755-02f4-4aad-b0e8-f8a937102ec1",
+		"name": "Customer V1 API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46707006"
+	},
+	"item": [
+		{
+			"name": "customers",
+			"item": [
+				{
+					"name": "{customerId}",
+					"item": [
+						{
+							"name": "Get customer by id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/customers/:customerId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers",
+										":customerId"
+									],
+									"variable": [
+										{
+											"key": "customerId",
+											"value": "6dd910cf-999d-4210-a21c-2006166f47fe",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer <token>",
+												"description": "Added as a part of security scheme: bearer"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/customers/:customerId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												":customerId"
+											],
+											"variable": [
+												{
+													"key": "customerId",
+													"value": "810d81b4-3a3f-1449-ee75-afc3dcda1be5",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"customerId\": \"217bac25-98e9-176e-b8a1-697281568d5c\",\n  \"status\": true,\n  \"person\": {\n    \"name\": \"string\",\n    \"gender\": \"M\",\n    \"age\": 390,\n    \"identificationNumber\": \"string\",\n    \"address\": \"string\",\n    \"phone\": \"string\",\n    \"personId\": \"7637c377-2b8c-2cdd-585d-2277c29d6a5b\"\n  }\n}"
+								},
+								{
+									"name": "Resource not found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer <token>",
+												"description": "Added as a part of security scheme: bearer"
+											},
+											{
+												"key": "Accept",
+												"value": "application/problem+json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/customers/:customerId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												":customerId"
+											],
+											"variable": [
+												{
+													"key": "customerId",
+													"value": "810d81b4-3a3f-1449-ee75-afc3dcda1be5",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/problem+json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"Email already registered\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Replace customer",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"customerId\": \"6dd910cf-999d-4210-a21c-2006166f47fe\",\n    \"status\": true,\n    \"person\": {\n        \"name\": \"Jose Lema1\",\n        \"gender\": \"M\",\n        \"age\": 32,\n        \"identificationNumber\": \"0102030405\",\n        \"address\": \"Otavalo sn y principal\",\n        \"phone\": \"0982548785\",\n        \"personId\": \"fcab12dd-15e0-4670-afa5-f7452dba1f19\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers/:customerId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers",
+										":customerId"
+									],
+									"variable": [
+										{
+											"key": "customerId",
+											"value": "6dd910cf-999d-4210-a21c-2006166f47fe",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Updated",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer <token>",
+												"description": "Added as a part of security scheme: bearer"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"status\": false,\n  \"person\": {\n    \"name\": \"string\",\n    \"gender\": \"F\",\n    \"age\": 7791,\n    \"identificationNumber\": \"string\",\n    \"address\": \"string\",\n    \"phone\": \"string\"\n  }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers/:customerId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												":customerId"
+											],
+											"variable": [
+												{
+													"key": "customerId",
+													"value": "810d81b4-3a3f-1449-ee75-afc3dcda1be5",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"customerId\": \"217bac25-98e9-176e-b8a1-697281568d5c\",\n  \"status\": true,\n  \"person\": {\n    \"name\": \"string\",\n    \"gender\": \"M\",\n    \"age\": 390,\n    \"identificationNumber\": \"string\",\n    \"address\": \"string\",\n    \"phone\": \"string\",\n    \"personId\": \"7637c377-2b8c-2cdd-585d-2277c29d6a5b\"\n  }\n}"
+								},
+								{
+									"name": "Resource not found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer <token>",
+												"description": "Added as a part of security scheme: bearer"
+											},
+											{
+												"key": "Accept",
+												"value": "application/problem+json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"status\": false,\n  \"person\": {\n    \"name\": \"string\",\n    \"gender\": \"F\",\n    \"age\": 7791,\n    \"identificationNumber\": \"string\",\n    \"address\": \"string\",\n    \"phone\": \"string\"\n  }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers/:customerId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												":customerId"
+											],
+											"variable": [
+												{
+													"key": "customerId",
+													"value": "810d81b4-3a3f-1449-ee75-afc3dcda1be5",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/problem+json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"Email already registered\"\n}"
+								},
+								{
+									"name": "Conflict",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer <token>",
+												"description": "Added as a part of security scheme: bearer"
+											},
+											{
+												"key": "Accept",
+												"value": "application/problem+json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"status\": false,\n  \"person\": {\n    \"name\": \"string\",\n    \"gender\": \"F\",\n    \"age\": 7791,\n    \"identificationNumber\": \"string\",\n    \"address\": \"string\",\n    \"phone\": \"string\"\n  }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers/:customerId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												":customerId"
+											],
+											"variable": [
+												{
+													"key": "customerId",
+													"value": "810d81b4-3a3f-1449-ee75-afc3dcda1be5",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Conflict",
+									"code": 409,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/problem+json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"Email already registered\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete customer",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/problem+json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/customers/:customerId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers",
+										":customerId"
+									],
+									"variable": [
+										{
+											"key": "customerId",
+											"value": "6dd910cf-999d-4210-a21c-2006166f47fe",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Deleted",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer <token>",
+												"description": "Added as a part of security scheme: bearer"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/customers/:customerId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												":customerId"
+											],
+											"variable": [
+												{
+													"key": "customerId",
+													"value": "810d81b4-3a3f-1449-ee75-afc3dcda1be5",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Resource not found",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer <token>",
+												"description": "Added as a part of security scheme: bearer"
+											},
+											{
+												"key": "Accept",
+												"value": "application/problem+json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/customers/:customerId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												":customerId"
+											],
+											"variable": [
+												{
+													"key": "customerId",
+													"value": "810d81b4-3a3f-1449-ee75-afc3dcda1be5",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/problem+json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"Email already registered\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Create customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"person\": {\n    \"name\": \"Jose Lema\",\n    \"gender\": \"M\",\n    \"age\": 32,\n    \"identificationNumber\": \"0102030405\",\n    \"address\": \"Otavalo sn y principal\",\n    \"phone\": \"0982548785\"\n  },\n  \"password\": \"1234\",\n  \"status\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"person\": {\n    \"name\": \"Jose Lema\",\n    \"gender\": \"M\",\n    \"age\": 32,\n    \"identificationNumber\": \"0102030405\",\n    \"address\": \"Otavalo sn y principal\",\n    \"phone\": \"0982548785\"\n  },\n  \"password\": \"1234\",\n  \"status\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"customerId\": \"217bac25-98e9-176e-b8a1-697281568d5c\",\n  \"status\": true,\n  \"person\": {\n    \"name\": \"string\",\n    \"gender\": \"M\",\n    \"age\": 390,\n    \"identificationNumber\": \"string\",\n    \"address\": \"string\",\n    \"phone\": \"string\",\n    \"personId\": \"7637c377-2b8c-2cdd-585d-2277c29d6a5b\"\n  }\n}"
+						},
+						{
+							"name": "Invalid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/problem+json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"person\": {\n    \"name\": \"Jose Lema\",\n    \"gender\": \"M\",\n    \"age\": 32,\n    \"identificationNumber\": \"0102030405\",\n    \"address\": \"Otavalo sn y principal\",\n    \"phone\": \"0982548785\"\n  },\n  \"password\": \"1234\",\n  \"status\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/problem+json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Email already registered\"\n}"
+						},
+						{
+							"name": "Conflict",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/problem+json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"person\": {\n    \"name\": \"Jose Lema\",\n    \"gender\": \"M\",\n    \"age\": 32,\n    \"identificationNumber\": \"0102030405\",\n    \"address\": \"Otavalo sn y principal\",\n    \"phone\": \"0982548785\"\n  },\n  \"password\": \"1234\",\n  \"status\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/problem+json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Email already registered\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearerToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		}
+	]
+}

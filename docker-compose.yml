@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    image: customer-v1:1.0.0
+    container_name: customer-v1
+    ports:
+      - "8080:8080"
+    environment:
+      # Usa el adaptador R2DBC ReactiveCrudRepository (puedes cambiarlo si tienes otros perfiles)
+      SPRING_PROFILES_ACTIVE: crud-repo
+    # Si ya tienes la imagen local, puedes comentar 'build: .' y dejar solo 'image:'
+    # restart: unless-stopped

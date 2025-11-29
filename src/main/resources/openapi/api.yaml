@@ -1,0 +1,195 @@
+openapi: 3.1.0
+info:
+  title: Customer API
+  version: 1.0.1
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: Customers
+paths:
+  /customers:
+    post:
+      tags: [Customers]
+      summary: Create customer
+      operationId: createCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CustomerCreate' }
+            examples:
+              joseLema:
+                value:
+                  person:
+                    name: "Jose Lema"
+                    gender: "M"
+                    age: 32
+                    identificationNumber: "0102030405"
+                    address: "Otavalo sn y principal"
+                    phone: "0982548785"
+                  password: "1234"
+                  status: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Customer' }
+        "400": { $ref: '#/components/responses/BadRequest' }
+        "409": { $ref: '#/components/responses/Conflict' }
+
+  /customers/{customerId}:
+    parameters:
+      - in: path
+        name: customerId
+        required: true
+        schema: { type: string, format: uuid }
+    get:
+      tags: [Customers]
+      summary: Get customer by id
+      operationId: getCustomer
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/Customer' } } } }
+        "404": { $ref: '#/components/responses/NotFound' }
+    put:
+      tags: [Customers]
+      summary: Replace customer
+      operationId: updateCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CustomerUpdate' }
+      responses:
+        "200": { description: Updated, content: { application/json: { schema: { $ref: '#/components/schemas/Customer' } } } }
+        "404": { $ref: '#/components/responses/NotFound' }
+        "409": { $ref: '#/components/responses/Conflict' }
+    delete:
+      tags: [Customers]
+      summary: Delete customer
+      operationId: deleteCustomer
+      responses:
+        "204": { description: Deleted }
+        "404": { $ref: '#/components/responses/NotFound' }
+
+webhooks:
+  customer.created:
+    post:
+      summary: Emitted when a customer is created
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                eventId: { type: string, format: uuid }
+                type: { type: string, enum: ["customer.created"] }
+                time: { type: string, format: date-time }
+                data: { $ref: '#/components/schemas/Customer' }
+      responses:
+        "200":
+          description: OK
+  customer.updated:
+    post:
+      summary: Emitted when a customer is updated
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                eventId: { type: string, format: uuid }
+                type: { type: string, enum: ["customer.updated"] }
+                time: { type: string, format: date-time }
+                data: { $ref: '#/components/schemas/Customer' }
+      responses:
+        "200":
+          description: OK
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    PersonBase:
+      type: object
+      required: [name, gender, age, identificationNumber, address, phone]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          x-field-extra-annotation: "@jakarta.validation.constraints.NotBlank"
+        gender: { type: string, enum: [M, F, O] }
+        age: { type: integer, minimum: 0 }
+        identificationNumber:
+          type: string
+          description: "DNI/ID"
+          minLength: 1
+          x-field-extra-annotation: "@jakarta.validation.constraints.NotBlank"
+        address:
+          type: string
+          minLength: 1
+          x-field-extra-annotation: "@jakarta.validation.constraints.NotBlank"
+        phone:
+          type: string
+          minLength: 1
+          x-field-extra-annotation: "@jakarta.validation.constraints.NotBlank"
+
+    Person:
+      allOf:
+        - $ref: '#/components/schemas/PersonBase'
+        - type: object
+          properties:
+            personId: { type: string, format: uuid }
+
+    Customer:
+      type: object
+      required: [customerId, status, person]
+      properties:
+        customerId: { type: string, format: uuid }
+        status: { type: boolean }
+        person: { $ref: '#/components/schemas/Person' }
+
+    CustomerCreate:
+      type: object
+      required: [person, password, status]
+      properties:
+        person: { $ref: '#/components/schemas/PersonBase' }
+        password: { type: string, minLength: 4, writeOnly: true }
+        status: { type: boolean }
+
+    CustomerUpdate:
+      type: object
+      required: [status, person]
+      properties:
+        status: { type: boolean }
+        person: { $ref: '#/components/schemas/PersonBase' }
+
+    AppException:
+      type: object
+      description: Simple error envelope.
+      additionalProperties: false
+      properties:
+        message:
+          type: string
+          example: Email already registered
+      required: [ message ]
+
+  responses:
+    BadRequest:
+      description: Invalid request
+      content: { application/problem+json: { schema: { $ref: '#/components/schemas/AppException' } } }
+    NotFound:
+      description: Resource not found
+      content: { application/problem+json: { schema: { $ref: '#/components/schemas/AppException' } } }
+    Conflict:
+      description: Conflict
+      content: { application/problem+json: { schema: { $ref: '#/components/schemas/AppException' } } }
+
+security:
+  - bearerAuth: []
